@@ -19,7 +19,6 @@
             await SeedRoleAsync(roleManager, GlobalConstants.AdministratorRoleName);
             await SeedRoleAsync(roleManager, "Client");
             await SeedRoleAsync(roleManager, "Guest");
-
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)

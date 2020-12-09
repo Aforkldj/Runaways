@@ -1,7 +1,6 @@
 ﻿namespace Runaways.Data.Models
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     using Runaways.Data.Common.Models;
 
@@ -12,11 +11,9 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        [Required]
         public string SeasonId { get; set; }
         public virtual Season Season { get; set; }
 
-        [Required]
         public string RoomId { get; set; }
         public virtual Room Room { get; set; }
 

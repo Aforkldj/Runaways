@@ -10,7 +10,6 @@
     using Microsoft.EntityFrameworkCore;
     using Runaways.Data.Common.Models;
     using Runaways.Data.Models;
-    using Runaways.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -102,6 +101,11 @@
                 var method = SetIsDeletedQueryFilterMethod.MakeGenericMethod(deletableEntityType.ClrType);
                 method.Invoke(null, new object[] { builder });
             }
+
+            builder.Entity<Hotel>()
+            .HasOne(b => b.CheckList)
+            .WithOne(i => i.Hotel)
+            .HasForeignKey<CheckList>(b => b.Id);
 
             // Disable cascade delete
             var foreignKeys = entityTypes

@@ -5,5 +5,67 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+    <p>
+        This project was initiated on @ViewData["StartDate"], @ViewData["DaysSinceStarted"] days ago.
+    </p>
+    <h2 class="display-8">Your start point towards...</h2>
+
+    <div class="list-inline">
+        <div class="list-inline-item" method="post" action="/Home/Search">
+            <a href="/mountains.jpg" class="text-dark">
+                <img src="mountains.jpg" alt="The Mountains" style="width:500px;height: 168px">
+                <div class="caption">
+                    <p>...the call of The Mountains</p>
+                </div>
+            </a>
+        </div>
+        <div class="list-inline-item">
+            <div class="caption">
+                <p>OR</p>
+            </div>
+        </div>
+        <div class="list-inline-item" method="post" action="/Home/Search">
+            <a href="sea.jpg" class="text-dark">
+                <img src="sea.jpg" alt="The Seaside" style="width:500px;height:168px">
+                <div class="caption">
+                    <p>...the whispers of The Sea</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div style="padding: 5%;">
+        <form method="post">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    Tutorials
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">HTML</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">CSS</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">JavaScript</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
+                       placeholder="Enter email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <div class="form-group">
+                <p>Already have account? <a href="/Users/Login">Login Now!</a></p>
+            </div>
+            <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
+        </form>
+    </div>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

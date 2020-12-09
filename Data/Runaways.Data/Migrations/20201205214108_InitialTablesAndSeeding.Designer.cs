@@ -10,7 +10,7 @@ using Runaways.Data;
 namespace Runaways.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201126151907_InitialTablesAndSeeding")]
+    [Migration("20201205214108_InitialTablesAndSeeding")]
     partial class InitialTablesAndSeeding
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -370,8 +370,8 @@ namespace Runaways.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Stars")
-                        .HasColumnType("int");
+                    b.Property<string>("Stars")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -383,35 +383,41 @@ namespace Runaways.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("HasBigRooms")
-                        .HasColumnType("bit");
+                    b.Property<int>("HasBigRooms")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("HasGreatChoiceBuffet")
-                        .HasColumnType("bit");
+                    b.Property<int>("HasGreatChoiceBuffet")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("HasIntimateAtmosphere")
-                        .HasColumnType("bit");
+                    b.Property<int>("HasIntimateAtmosphere")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("HasRoomsWithGreatView")
-                        .HasColumnType("bit");
+                    b.Property<int>("HasRoomsWithGreatView")
+                        .HasColumnType("int");
 
-                    b.Property<bool?>("IsSparklingClean")
-                        .HasColumnType("bit");
+                    b.Property<string>("HotelId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsStaffVeryAttentive")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsSparklingClean")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IsStaffVeryAttentive")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ReviewId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("CheckLists");
                 });
@@ -422,6 +428,7 @@ namespace Runaways.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("AccommodationId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ClientId")
@@ -434,9 +441,11 @@ namespace Runaways.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -549,9 +558,6 @@ namespace Runaways.Data.Migrations
 
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ExternalId")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HotelId")
                         .HasColumnType("nvarchar(450)");
@@ -670,10 +676,6 @@ namespace Runaways.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CheckListId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("Cleanliness")
                         .HasColumnType("int");
 
@@ -711,9 +713,6 @@ namespace Runaways.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CheckListId")
-                        .IsUnique();
 
                     b.HasIndex("ClientId");
 
@@ -808,11 +807,9 @@ namespace Runaways.Data.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("RoomId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SeasonId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -1007,11 +1004,28 @@ namespace Runaways.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Runaways.Data.Models.CheckList", b =>
+                {
+                    b.HasOne("Runaways.Data.Models.ApplicationUser", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Runaways.Data.Models.Hotel", "Hotel")
+                        .WithOne("CheckList")
+                        .HasForeignKey("Runaways.Data.Models.CheckList", "Id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Runaways.Data.Models.Guest", b =>
                 {
                     b.HasOne("Runaways.Data.Models.Accommodation", "Accommodation")
                         .WithMany("Guests")
-                        .HasForeignKey("AccommodationId");
+                        .HasForeignKey("AccommodationId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Runaways.Data.Models.ApplicationUser", "Client")
                         .WithMany()
@@ -1079,12 +1093,6 @@ namespace Runaways.Data.Migrations
 
             modelBuilder.Entity("Runaways.Data.Models.Review", b =>
                 {
-                    b.HasOne("Runaways.Data.Models.CheckList", "CheckList")
-                        .WithOne("Review")
-                        .HasForeignKey("Runaways.Data.Models.Review", "CheckListId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Runaways.Data.Models.ApplicationUser", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
@@ -1123,15 +1131,11 @@ namespace Runaways.Data.Migrations
                 {
                     b.HasOne("Runaways.Data.Models.Room", "Room")
                         .WithMany("SeasonPrices")
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("RoomId");
 
                     b.HasOne("Runaways.Data.Models.Season", "Season")
                         .WithMany("SeasonPrices")
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("SeasonId");
                 });
 
             modelBuilder.Entity("Runaways.Data.Models.Season", b =>

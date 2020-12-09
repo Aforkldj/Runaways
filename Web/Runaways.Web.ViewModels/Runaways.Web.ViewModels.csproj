@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Services\Runaways.Services.Mapping\Runaways.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resort\" />
+  </ItemGroup>
+
 </Project>

@@ -14,7 +14,7 @@
             this.Hotels = new HashSet<Hotel>();
         }
 
-        public int Stars { get; set; }
+        public string Stars { get; set; }
 
         public ICollection<Hotel> Hotels { get; set; }
     }

@@ -1,9 +1,8 @@
 ﻿namespace Runaways.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using Runaways.Data.Models;
     using Runaways.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

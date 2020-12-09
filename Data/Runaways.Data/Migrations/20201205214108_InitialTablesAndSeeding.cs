@@ -14,7 +14,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Type = table.Column<string>(nullable: false),
+                    Type = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,7 +28,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Status = table.Column<string>(nullable: false),
+                    Status = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,31 +42,11 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Stars = table.Column<int>(nullable: false),
+                    Stars = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CheckLists",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    HasBigRooms = table.Column<bool>(nullable: true),
-                    IsSparklingClean = table.Column<bool>(nullable: true),
-                    HasGreatChoiceBuffet = table.Column<bool>(nullable: true),
-                    HasIntimateAtmosphere = table.Column<bool>(nullable: true),
-                    HasRoomsWithGreatView = table.Column<bool>(nullable: true),
-                    IsStaffVeryAttentive = table.Column<bool>(nullable: true),
-                    ReviewId = table.Column<string>(nullable: false),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CheckLists", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,7 +56,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Type = table.Column<string>(nullable: false),
+                    Type = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +70,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Tag = table.Column<string>(nullable: false),
+                    Tag = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -104,7 +84,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Location = table.Column<string>(nullable: false),
+                    Location = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -118,7 +98,7 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    Name = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -134,7 +114,7 @@ namespace Runaways.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Type = table.Column<string>(nullable: false),
                     RegularBeds = table.Column<int>(nullable: true),
-                    ExtraBeds = table.Column<int>(nullable: true),
+                    ExtraBeds = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -150,7 +130,7 @@ namespace Runaways.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    ResortTypeId = table.Column<string>(nullable: false),
+                    ResortTypeId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,7 +161,7 @@ namespace Runaways.Data.Migrations
                     CategoryId = table.Column<string>(nullable: false),
                     HotelTypeId = table.Column<string>(nullable: false),
                     BoardId = table.Column<string>(nullable: false),
-                    ResortId = table.Column<string>(nullable: true),
+                    ResortId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -223,7 +203,7 @@ namespace Runaways.Data.Migrations
                     CheckOut = table.Column<DateTime>(nullable: false),
                     TotalPrice = table.Column<double>(nullable: false),
                     HotelId = table.Column<string>(nullable: false),
-                    ClientId = table.Column<string>(nullable: false),
+                    ClientId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -243,6 +223,39 @@ namespace Runaways.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CheckLists",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    HasBigRooms = table.Column<int>(nullable: false),
+                    IsSparklingClean = table.Column<int>(nullable: false),
+                    HasGreatChoiceBuffet = table.Column<int>(nullable: false),
+                    HasIntimateAtmosphere = table.Column<int>(nullable: false),
+                    HasRoomsWithGreatView = table.Column<int>(nullable: false),
+                    IsStaffVeryAttentive = table.Column<int>(nullable: false),
+                    ClientId = table.Column<string>(nullable: false),
+                    HotelId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckLists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckLists_AspNetUsers_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CheckLists_Hotels_Id",
+                        column: x => x.Id,
+                        principalTable: "Hotels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -256,19 +269,12 @@ namespace Runaways.Data.Migrations
                     StaffAttitude = table.Column<int>(nullable: false),
                     OverallQualityPriceRelevance = table.Column<int>(nullable: false),
                     Comment = table.Column<string>(maxLength: 500, nullable: true),
-                    CheckListId = table.Column<string>(nullable: false),
                     ClientId = table.Column<string>(nullable: false),
-                    HotelId = table.Column<string>(nullable: false),
+                    HotelId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reviews", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reviews_CheckLists_CheckListId",
-                        column: x => x.CheckListId,
-                        principalTable: "CheckLists",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Reviews_AspNetUsers_ClientId",
                         column: x => x.ClientId,
@@ -295,7 +301,7 @@ namespace Runaways.Data.Migrations
                     RoomNameId = table.Column<string>(nullable: false),
                     Allotment = table.Column<int>(nullable: true),
                     MinGuests = table.Column<int>(nullable: true),
-                    MaxGuests = table.Column<int>(nullable: true),
+                    MaxGuests = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -331,7 +337,7 @@ namespace Runaways.Data.Migrations
                     DeletedOn = table.Column<DateTime>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    HotelId = table.Column<string>(nullable: false),
+                    HotelId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -354,7 +360,7 @@ namespace Runaways.Data.Migrations
                     RoomId = table.Column<string>(nullable: false),
                     BookingId = table.Column<string>(nullable: false),
                     BookingStatusId = table.Column<string>(nullable: false),
-                    GuestCount = table.Column<int>(nullable: false),
+                    GuestCount = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -391,11 +397,10 @@ namespace Runaways.Data.Migrations
                     Path = table.Column<string>(nullable: false),
                     DefaultText = table.Column<string>(nullable: false),
                     ImageTagId = table.Column<string>(nullable: false),
-                    ExternalId = table.Column<string>(nullable: true),
                     HotelId = table.Column<string>(nullable: true),
                     ResortId = table.Column<string>(nullable: true),
                     ReviewId = table.Column<string>(nullable: true),
-                    RoomId = table.Column<string>(nullable: true),
+                    RoomId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -441,9 +446,9 @@ namespace Runaways.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    SeasonId = table.Column<string>(nullable: false),
-                    RoomId = table.Column<string>(nullable: false),
-                    Price = table.Column<double>(nullable: false),
+                    SeasonId = table.Column<string>(nullable: true),
+                    RoomId = table.Column<string>(nullable: true),
+                    Price = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -469,11 +474,11 @@ namespace Runaways.Data.Migrations
                     Id = table.Column<string>(nullable: false),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: true),
-                    AccommodationId = table.Column<string>(nullable: true),
-                    ClientId = table.Column<string>(nullable: true),
+                    AccommodationId = table.Column<string>(nullable: false),
+                    ClientId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -516,6 +521,11 @@ namespace Runaways.Data.Migrations
                 name: "IX_Bookings_HotelId",
                 table: "Bookings",
                 column: "HotelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CheckLists_ClientId",
+                table: "CheckLists",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Guests_AccommodationId",
@@ -583,12 +593,6 @@ namespace Runaways.Data.Migrations
                 column: "ResortTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_CheckListId",
-                table: "Reviews",
-                column: "CheckListId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ClientId",
                 table: "Reviews",
                 column: "ClientId");
@@ -647,6 +651,9 @@ namespace Runaways.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CheckLists");
+
+            migrationBuilder.DropTable(
                 name: "Guests");
 
             migrationBuilder.DropTable(
@@ -675,9 +682,6 @@ namespace Runaways.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Rooms");
-
-            migrationBuilder.DropTable(
-                name: "CheckLists");
 
             migrationBuilder.DropTable(
                 name: "Hotels");

@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     using Runaways.Data.Common.Models;
 
@@ -31,12 +30,6 @@
         public string Comment { get; set; }
 
         [Required]
-        [ForeignKey(nameof(CheckList))]
-        public string CheckListId { get; set; }
-        public virtual CheckList CheckList { get; set; }
-
-        [Required]
-        [ForeignKey(nameof(Client))]
         public string ClientId { get; set; }
         public virtual ApplicationUser Client { get; set; }
 

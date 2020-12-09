@@ -28,6 +28,11 @@
                               new SettingsSeeder(),
                               new RolesSeeder(),
                               new UsersSeeder(),
+                              new BoardsSeeder(),
+                              new CategoriesSeeder(),
+                              new ResortTypeSeeder(),
+                              new ResortsSeeder(),
+                              new RoomTypesSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -47,6 +47,8 @@
         public string BoardId { get; set; }
         public virtual Board Board { get; set; }
 
+        public virtual CheckList CheckList { get; set; }
+
         public virtual ICollection<Season> Seasons { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }

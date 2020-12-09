@@ -16,7 +16,7 @@
 
         // Mountain/Ski, Seaside/Beach, Leisure/Spa
         [Required]
-        public string Location { get; set; }
+        public string Type { get; set; }
 
         public virtual ICollection<Resort> Resorts { get; set; }
     }

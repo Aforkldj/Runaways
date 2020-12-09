@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using Runaways.Data.Common.Models;
 
     public class CheckList : BaseModel<string>
@@ -11,20 +12,24 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public bool? HasBigRooms { get; set; }
+        public int HasBigRooms { get; set; }
 
-        public bool? IsSparklingClean { get; set; }
+        public int IsSparklingClean { get; set; }
 
-        public bool? HasGreatChoiceBuffet { get; set; }
+        public int HasGreatChoiceBuffet { get; set; }
 
-        public bool? HasIntimateAtmosphere { get; set; }
+        public int HasIntimateAtmosphere { get; set; }
 
-        public bool? HasRoomsWithGreatView { get; set; }
+        public int HasRoomsWithGreatView { get; set; }
 
-        public bool? IsStaffVeryAttentive { get; set; }
+        public int IsStaffVeryAttentive { get; set; }
 
         [Required]
-        public string ReviewId { get; set; }
-        public virtual Review Review { get; set; }
+        public string ClientId { get; set; }
+        public virtual ApplicationUser Client { get; set; }
+
+        [Required]
+        public string HotelId { get; set; }
+        public virtual Hotel Hotel { get; set; }
     }
 }

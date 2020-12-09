@@ -23,6 +23,6 @@
         public virtual ImageTag ImageTag { get; set; }
 
         // EntityId is set if img is of Entity
-        public string ExternalId { get; set; }
+        // public string ExternalId { get; set; }
     }
 }

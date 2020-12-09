@@ -20,7 +20,6 @@
 
         public string Description { get; set; }
 
-        [Required]
         public string ResortTypeId { get; set; }
         public ResortType ResortType { get; set; }
 
